@@ -1,18 +1,27 @@
 <html>
 	<head>
 		<link rel="stylesheet" type="text/css" href="/styles.css">
-		<title>Homepage</title>
+		<title>Message Board</title>
 	</head>
 	<body>
-		<%- include('navbar', { links: links }) %>
-
+		<h1> Mini Messageboard </h1>
 		<ul>
-			<% users.forEach((user) => { %> 
-                <%- include('users/user', {user: user}); %> 
-            <% }); %>
+			<% if(messages.length > 0) {messages.forEach((msg, index) => { %>
+				<% let linkAddress = '/details/' + index %>
+				<li>
+					<div class="message">
+						<%= msg.text %> </br>
+					</div>
+
+					<b> <%= msg.user %> </b> 
+					(Posted on <%= msg.added.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) %>) 
+					<a href= <%= linkAddress %>>Details</a> </br> 
+				</li>
+			<% })} %>
 		</ul>
+
+		<form action="/new" method="get">
+			<button type="submit">New Message</button>
+		</form>	
 	</body>
-	<footer>
-		<%- include('footer') %>
-	</footer>
 </html>

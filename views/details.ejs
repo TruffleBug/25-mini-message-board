@@ -1,0 +1,36 @@
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="/styles.css">
+		<title>Message Details</title>
+	</head>
+	<body>
+		<h1> Details </h1>
+
+		<div class="details">
+			<% let ampm = 'AM' %>
+			<% let hour = messages[id].added.getHours() %>
+			<% if (hour >= 12) ampm = 'PM' %>
+			<% if (hour > 12) hour -= 12 %>
+			<p>
+				<span class="category">Written by: </span> 
+				<span class="info"><%= messages[id].user %></span>
+			</p>
+			<p>
+				<span class="category">Date: </span> 
+				<span class="info"><%= messages[id].added.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) %></span>
+			</p>
+			<p>
+				<span class="category">Time: </span> 
+				<span class="info"><%= hour %>:<%= messages[id].added.getMinutes().toLocaleString('en-US', {minimumIntegerDigits: 2}) %> <%= ampm %> </span>
+			</p>
+			<p>
+				<span class="category">Message: </span> 
+				<span class="info">"<%= messages[id].text %>"</span>
+			</p>
+		</div>
+
+		<form action="/" method="get">
+			<button type="submit">Back</button>
+		</form>	
+	</body>
+</html>

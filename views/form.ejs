@@ -1,0 +1,25 @@
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="/styles.css" />
+		<title>New Message</title>
+	</head>
+	<body>
+		<h1>New Message</h1>
+
+		<div class="newMessageForm">
+			<form method="POST" action="/new">
+				<label for="author">Name: </label>
+				<input type="text" name="author" id="author" required> </br>
+				
+				<label for="message">Message: </label>
+				<textarea name="message" id="message" class="newMsgText" required></textarea> </br>
+	
+				<input type="submit" value="Submit" class="submitButton">
+			</form>
+	
+			<form action="/" method="get">
+				<button type="submit">Back</button>
+			</form>	
+		</div>
+	</body>
+</html>
