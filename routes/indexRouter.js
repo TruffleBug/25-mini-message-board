@@ -1,5 +1,6 @@
 const { Router } = require('express');
 const indexRouter = Router();
+const CustomNotFoundError = require('../errors/CustomNotFoundError');
 
 const messages = [
 	{
@@ -24,7 +25,10 @@ indexRouter.get("/", (req, res) => {
 });
 
 indexRouter.get('/details/:id', (req, res) => {
-	res.render('details', { messages: messages, id: req.params.id })
+	if(req.params.id >= messages.length) {
+		throw new CustomNotFoundError('Message not found');
+	};
+	res.render('details', { messages: messages, id: req.params.id });
 });
 
 indexRouter.post("/new", (req, res) => {
@@ -36,9 +40,8 @@ indexRouter.post("/new", (req, res) => {
   res.redirect("/");
 });
 
-// indexRouter.get("/:index", (req, res) => {
-//   const { index } = req.params;
-//   res.send(`Index: ${index}`);
-// });
+// indexRouter.get("/*", (req, res) => {
+// 	throw new CustomNotFoundError('404 - Not found.')
+// })
 
 module.exports = indexRouter;
