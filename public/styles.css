@@ -34,6 +34,12 @@ li {
 	width: 100%;
 }
 
+li:hover {
+	box-shadow: none;
+	position: relative;
+	left: 0px;
+}
+
 button, 
 .submitButton {
 	background-color: var(--color5);

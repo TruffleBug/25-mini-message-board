@@ -1,18 +1,19 @@
-const { Router } = require("express");
-// const { getAuthorById } = require('../controllers/authorController');
+const { Router } = require('express');
 const newMsgRouter = Router();
+const db = require('../db');
 
-// newMsgRouter.get("/", (req, res) => res.send("New Message Form Placeholder"));
-
-// newMsgRouter.get("/:authorId", (req, res) => {
-//   const { authorId } = req.params;
-//   res.send(`Author ID: ${authorId}`);
-// });
-
-// newMsgRouter.get("/:authorId", getAuthorById);
-
-newMsgRouter.get("/", (req, res) => {
-    res.render("form")
-});  
+newMsgRouter
+	.route('/')
+	.get((req, res) => {
+		res.render('form');
+	})
+	.post((req, res) => {
+		db.messages.push({
+			text: req.body.message,
+			user: req.body.author,
+			added: new Date(),
+		});
+		res.redirect('/');
+	});
 
 module.exports = newMsgRouter;
